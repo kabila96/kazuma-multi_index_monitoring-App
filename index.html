@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Powell Ndlovu | Kazuma Forest Multi-Index Web App</title>
+  <style>
+    :root {
+      --bg: #f4f7f5;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --primary: #14532d;
+      --secondary: #166534;
+      --accent: #dff3e3;
+      --border: #d1d5db;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eef8f0 100%);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 2.6rem;
+      color: var(--primary);
+    }
+
+    .hero p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 900px;
+    }
+
+    .author {
+      font-weight: bold;
+      color: #374151;
+      margin-top: 14px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0f4d24;
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--secondary);
+      border-color: var(--secondary);
+    }
+
+    .btn-outline:hover {
+      background: #f0fdf4;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .preview-img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .feature-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .feature-box h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #111827;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section h2 {
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      display: block;
+      background: white;
+    }
+
+    .caption {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      background: var(--accent);
+      color: #14532d;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 34px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <section class="hero">
+      <h1>Kazuma Forest Multi-Index Web App</h1>
+      <p>
+        An interactive Earth Engine application for monitoring vegetation condition, moisture dynamics,
+        and fire-related disturbance proxies in Kazuma Forest, Zimbabwe, from 2016 to 2025.
+      </p>
+      <p>
+        The app integrates wet-season Landsat 8/9 composites with NDVI, NDMI, and NBR to support
+        exploratory environmental analysis through maps, annual trend charts, and pixel-level inspection.
+      </p>
+      <div class="author">Created by Powell A. Ndlovu | Chevening Scholar</div>
+
+      <div class="tag-row">
+        <span class="tag">Remote Sensing</span>
+        <span class="tag">Google Earth Engine</span>
+        <span class="tag">Landsat 8/9</span>
+        <span class="tag">NDVI</span>
+        <span class="tag">NDMI</span>
+        <span class="tag">NBR</span>
+        <span class="tag">Zimbabwe</span>
+      </div>
+
+      <div class="button-row">
+        <a class="btn btn-primary" href="https://ee-powellndlovu.projects.earthengine.app/view/kazuma-forest-multi-index-monitoring-app" target="_blank">Open Live App</a>
+       <a class="btn btn-outline" href="https://kabila96.github.io/powellndlovuportfolio/" target="_blank">View My Portfolio Website</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Project Preview</h2>
+        <img class="preview-img" src="images/kazuma-preview.png" alt="Kazuma Forest app preview" />
+        <p class="caption">
+          Main application interface showing the multi-index map, year slider, index selector,
+          and analytical panels.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Problem Statement</h2>
+        <p class="muted">
+          Forest monitoring often suffers from fragmented reporting and limited access to interactive tools
+          that show how vegetation condition changes over time. Kazuma Forest is ecologically important,
+          yet decision-makers benefit more from interpretable spatial evidence than static screenshots.
+        </p>
+        <p class="muted">
+          This project was developed to provide a more accessible, interactive way to examine vegetation
+          greenness, moisture response, and fire-related disturbance patterns across a ten-year period.
+        </p>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Methods</h2>
+      <div class="two-col">
+        <div>
+          <p><strong>Study area:</strong> Kazuma Forest, Zimbabwe</p>
+          <p><strong>Time period:</strong> 2016–2025</p>
+          <p><strong>Seasonal window:</strong> Wet-season composites, using December of the previous year to March of the selected year</p>
+        </div>
+        <div>
+          <p><strong>Satellite data:</strong> Landsat 8/9 Collection 2 Level 2</p>
+          <p><strong>Processing:</strong> Cloud masking, surface reflectance scaling, annual compositing, index derivation</p>
+          <p><strong>Indices:</strong> NDVI, NDMI, and NBR</p>
+        </div>
+      </div>
+
+      <ul>
+        <li><strong>NDVI</strong> was used to represent vegetation greenness and condition.</li>
+        <li><strong>NDMI</strong> was used to represent vegetation moisture status.</li>
+        <li><strong>NBR</strong> was used as a proxy for fire-related disturbance and burn sensitivity.</li>
+      </ul>
+    </section>
+
+    <section class="card section">
+      <h2>Key Features</h2>
+      <div class="features">
+        <div class="feature-box">
+          <h3>Interactive Year Slider</h3>
+          <p>Users can move through annual composites from 2016 to 2025 to observe spatial changes over time.</p>
+        </div>
+        <div class="feature-box">
+          <h3>Index Dropdown</h3>
+          <p>The app switches dynamically between NDVI, NDMI, and NBR for comparative interpretation.</p>
+        </div>
+        <div class="feature-box">
+          <h3>Annual Mean Charts</h3>
+          <p>Built-in charts summarize how each index changes through time at the study-area scale.</p>
+        </div>
+        <div class="feature-box">
+          <h3>Pixel Inspector</h3>
+          <p>Clicking the map reveals local NDVI, NDMI, and NBR time series for a selected pixel.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="two-col section">
+      <div class="card">
+        <h2>Why This Matters</h2>
+        <p class="muted">
+          This web app moves beyond static cartography by allowing users to investigate long-term
+          vegetation dynamics interactively. It is useful for environmental monitoring, conservation
+          planning, and communicating remote sensing outputs to non-technical audiences.
+        </p>
+        <p class="muted">
+          It also demonstrates how geospatial analytics can be turned into a deployable decision-support tool,
+          rather than remaining only as code in a notebook or script.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Results and Insights</h2>
+        <p class="muted">
+          The application enables users to identify spatial variability in greenness, moisture, and disturbance
+          proxies across Kazuma Forest. By linking annual maps with trend charts and pixel inspection, the tool
+          supports interpretation of both broad temporal patterns and localised changes.
+        </p>
+        <p class="muted">
+          This creates a stronger analytical workflow than using static one-year maps in isolation.
+        </p>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>App Gallery</h2>
+      <div class="gallery">
+        <div>
+          <img src="images/kazuma-preview.png" alt="Kazuma main interface screenshot" />
+          <div class="caption">Main app interface with selected index and year controls.</div>
+        </div>
+        <div>
+          <img src="images/kazuma-chart.png" alt="Kazuma annual chart screenshot" />
+          <div class="caption">Analytical chart showing yearly mean index behaviour.</div>
+        </div>
+        <div>
+          <img src="images/kazuma-inspector.png" alt="Kazuma pixel inspector screenshot" />
+          <div class="caption">Pixel inspector view for local time-series exploration.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Technology Stack</h2>
+      <ul>
+        <li>Google Earth Engine JavaScript API</li>
+        <li>Earth Engine Apps</li>
+        <li>Landsat 8/9 Collection 2 Level 2 imagery</li>
+        <li>Remote sensing indices: NDVI, NDMI, NBR</li>
+        <li>GitHub Pages for portfolio presentation</li>
+      </ul>
+    </section>
+
+    <footer>
+      Powell A. Ndlovu | GIS, Remote Sensing, and Environmental Data Analytics Portfolio
+    </footer>
+
+  </div>
+</body>
+</html>
